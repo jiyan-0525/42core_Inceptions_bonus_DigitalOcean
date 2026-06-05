@@ -1,0 +1,38 @@
+###Alpine
+
+# 先把网络起来
+ip link set eth0 up
+udhcpc -i eth0
+
+# 装openssh
+apk update
+apk add openssh
+
+# 启动sshd
+rc-service sshd start
+rc-update add sshd default
+
+# 允许root登录
+echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+rc-service sshd restart
+
+
+#......add fish:
+
+echo "https://dl-cdn.alpinelinux.org/alpine/latest-stable/community" >> /etc/apk/repositories
+apk update
+apk add fish
+
+echo "https://dl-cdn.alpinelinux.org/alpine/latest-stable/main" >> /etc/apk/repositories
+apk update
+apk add fish
+
+###Deban
+
+jiyanwang
+123456
+
+ssh root@127.0.0.1 -p 4243
+VM net: Host Port:4243 GUest Port:4242
+/etc/ssh/sshd_config: Port:4242
+

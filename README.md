@@ -29,7 +29,6 @@ The project includes:
 ## Project Structure
 
 ```
-.
 ├── Makefile
 ├── README.md
 ├── VM_setup.txt
@@ -42,6 +41,10 @@ The project includes:
 │   └── requirements
 │       ├── bonus
 │       │   ├── adminer
+│       │   │   ├── Dockerfile
+│       │   │   └── conf
+│       │   │       └── www.conf
+│       │   ├── portainer
 │       │   │   └── Dockerfile
 │       │   ├── portfolio
 │       │   │   ├── Dockerfile
@@ -51,10 +54,6 @@ The project includes:
 │       │   │   ├── Dockerfile
 │       │   │   └── conf
 │       │   │       └── redis.conf
-│       │   ├── static-site
-│       │   │   ├── Dockerfile
-│       │   │   └── html
-│       │   │       └── index.html
 │       │   └── vsftpd
 │       │       ├── Dockerfile
 │       │       ├── conf
@@ -79,7 +78,6 @@ The project includes:
 │           │   └── wp-setup.sh
 │           └── wp-config.php
 └── steptosetup.txt
-
 ```
 
 ## Instructions

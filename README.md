@@ -8,7 +8,8 @@ Once the containers are running, you can access the services:
 | :--- | :--- |
 | **WordPress** | [https://127.0.0.1](https://127.0.0.1) |
 | **Portfolio (CV)** | [https://127.0.0.1/portfolio](https://127.0.0.1/portfolio) |
-| **Portainer (Admin UI)** `docker restart portainer`| [https://localhost:9443](https://localhost:9443) |
+| **Adminer** | [https://127.0.0.1/adminer](https://127.0.0.1/adminer) |
+| **Portainer ** `docker restart portainer`| [https://localhost:9443](https://localhost:9443) |
 | **FTP Server**  `ftp jiyawang.42.fr` | `Port 21` (User: `jiyan`, Pass: `ftp_password`) |
 | **Redis Cache**                          | Integrated into WordPress |
 
@@ -168,6 +169,8 @@ docker logs wordpress
 
 ```bash
 docker exec -it mariadb mariadb -u root
+
+docker exec -it mariadb mysql -u root -proot_password -e "SELECT user, host FROM mysql.user;"
 ```
 
 #### 1. Stop and remove all containers, networks, and images associated with the project

@@ -54,39 +54,39 @@ services:
       - inception
     restart: always
 
-  # redis:
-  #   container_name: redis
-  #   build:
-  #     context: ./requirements/bonus/redis
-  #   networks:
-  #     - inception
-  #   restart: unless-stopped
+  redis:
+    container_name: redis
+    build:
+      context: ./requirements/bonus/redis
+    networks:
+      - inception
+    restart: unless-stopped
 
-  # adminer:
-  #   container_name: adminer
-  #   build:
-  #     context: ./requirements/bonus/adminer
-  #   networks:
-  #     - inception
-  #   depends_on:
-  #     - mariadb
-  #   restart: unless-stopped
+  adminer:
+    container_name: adminer
+    build:
+      context: ./requirements/bonus/adminer
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+    restart: unless-stopped
 
-  # ftp-server:
-  #   container_name: ftp-server
-  #   build:
-  #     context: ./requirements/bonus/vsftpd
-  #   volumes:
-  #     - /home/jiyan/data/wordpress:/var/www/html
-  #   environment:
-  #     - FTP_USER=${FTP_USER}
-  #     - FTP_PASS=${FTP_PASS}
-  #   ports:
-  #     - "21:21"
-  #     - "21100-21110:21100-21110"
-  #   networks:
-  #     - inception
-  #   restart: unless-stopped
+  ftp-server:
+    container_name: ftp-server
+    build:
+      context: ./requirements/bonus/vsftpd
+    volumes:
+      - /home/jiyan/data/wordpress:/var/www/html
+    environment:
+      - FTP_USER=${FTP_USER}
+      - FTP_PASS=${FTP_PASS}
+    ports:
+      - "21:21"
+      - "21100-21110:21100-21110"
+    networks:
+      - inception
+    restart: unless-stopped
 
   portfolio:
     container_name: portfolio
@@ -119,130 +119,3 @@ networks:
   inception:
     driver: bridge
 
-# Volumes are bind mounts to /home/jiyan/data/ as required by 42 Inception project
-#   mariadb:
-#     container_name: mariadb
-#     build:
-#       context: ./requirements/mariadb
-#     env_file:
-#       - .env
-#     secrets:
-#       - db_password
-#       - db_root_password
-#     volumes:
-#       - /home/jiyan/data/mariadb:/var/lib/mysql
-#     networks:
-#       - inception
-#     restart: unless-stopped
-#     expose:
-#       - "3306"
-
-#   wordpress:
-#     container_name: wordpress
-#     build:
-#       context: ./requirements/wordpress
-#     env_file:
-#       - .env
-#     secrets:
-#       - db_password
-#     volumes:
-#       - /home/jiyan/data/wordpress:/var/www/html
-#     environment:
-#       - WORDPRESS_DB_HOST=mariadb
-#       - MYSQL_DATABASE=${MYSQL_DATABASE}
-#       - MYSQL_USER=${MYSQL_USER}
-#       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-#     networks:
-#       - inception
-#     depends_on:
-#       - mariadb
-#     restart: unless-stopped
-#     expose:
-#       - "9000"
-
-#   nginx:
-#     container_name: nginx
-#     build:
-#       context: ./requirements/nginx
-#       dockerfile: Dockerfile
-#     ports:
-#       - "443:443"
-#     volumes:
-#       - /home/jiyan/data/wordpress:/var/www/html
-#     depends_on:
-#       - wordpress
-#     networks:
-#       - inception
-#     restart: always
-
-#   redis:
-#     container_name: redis
-#     build:
-#       context: ./requirements/bonus/redis
-#     networks:
-#       - inception
-#     restart: unless-stopped
-
-#   adminer:
-#     container_name: adminer
-#     build:
-#       context: ./requirements/bonus/adminer
-#     networks:
-#       - inception
-#     depends_on:
-#       - mariadb
-#     restart: unless-stopped
-
-#   ftp-server:
-#     container_name: ftp-server
-#     build:
-#       context: ./requirements/bonus/vsftpd
-#     volumes:
-#       - /home/jiyan/data/wordpress:/var/www/html
-#     environment:
-#       - FTP_USER=${FTP_USER}
-#       - FTP_PASS=${FTP_PASS}
-#     ports:
-#       - "21:21"
-#       - "21100-21110:21100-21110"
-#     networks:
-#       - inception
-#     restart: unless-stopped
-
-
-#   portfolio:
-#     container_name: portfolio
-#     build:
-#       context: ./requirements/bonus/portfolio
-#     networks:
-#       - inception
-#     restart: unless-stopped
-
-#   portainer:
-#     container_name: portainer
-#     build:
-#       context: ./requirements/bonus/portainer
-#     volumes:
-#       - /var/run/docker.sock:/var/run/docker.sock
-#       - /home/jiyan/data/portainer:/data
-#     networks:
-#       - inception
-#     ports:
-#       - "9443:9443"
-#     restart: unless-stopped
-
-# secrets:
-#   db_password:
-#     file: ../secrets/db_password.txt
-#   db_root_password:
-#     file: ../secrets/db_root_password.txt
-
-# # Volumes section removed as we use direct bind mounts for 42 Inception requirements
-
-# networks:
-#   inception:
-#     driver: bridge
-
-# volumes:
-#   mariadb_data:
-#   wordpress_data:

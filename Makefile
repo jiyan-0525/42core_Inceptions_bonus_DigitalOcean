@@ -19,6 +19,9 @@ build: $(DATA_DIR)/mariadb $(DATA_DIR)/wordpress
 up:
 	docker compose -f $(COMPOSE_FILE) up -d
 
+restart:
+	docker compose -f $(COMPOSE_FILE) restart
+
 # Stop services
 down:
 	docker compose -f $(COMPOSE_FILE) down

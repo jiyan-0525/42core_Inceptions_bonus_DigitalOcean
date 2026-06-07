@@ -9,8 +9,8 @@ Once the containers are running, you can access the services:
 | **WordPress** | [https://127.0.0.1](https://127.0.0.1) |
 | **Portfolio (CV)** | [https://127.0.0.1/portfolio](https://127.0.0.1/portfolio) |
 | **Adminer** | [https://127.0.0.1/adminer](https://127.0.0.1/adminer) |
-| **Portainer ** `docker restart portainer`| [https://localhost:9443](https://localhost:9443) |
-| **FTP Server**  `ftp jiyawang.42.fr` | `Port 21` (User: `jiyan`, Pass: `ftp_password`) |
+| **Portainer** | [https://localhost:9443](https://localhost:9443) ```run frist:  docker restart portainer ```|
+| **FTP Server**  | `Port 21` (User: `jiyan`, Pass: `ftp_password`), `ftp jiyawang.42.fr`  | 
 | **Redis Cache**                          | Integrated into WordPress |
 
 **Via SSH (for container management):**

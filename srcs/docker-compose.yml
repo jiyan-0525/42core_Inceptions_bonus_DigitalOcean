@@ -9,7 +9,7 @@ services:
       - db_password
       - db_root_password
     volumes:
-      - /home/jiyan/data/mariadb:/var/lib/mysql
+      - /home/jiyanwang/data/mariadb:/var/lib/mysql
     networks:
       - inception
     restart: unless-stopped
@@ -25,7 +25,7 @@ services:
     secrets:
       - db_password
     volumes:
-      - /home/jiyan/data/wordpress:/var/www/html
+      - /home/jiyanwang/data/wordpress:/var/www/html
     environment:
       - WORDPRESS_DB_HOST=mariadb
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -47,7 +47,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - /home/jiyan/data/wordpress:/var/www/html
+      - /home/jiyanwang/data/wordpress:/var/www/html
     depends_on:
       - wordpress
     networks:
@@ -77,7 +77,7 @@ services:
     build:
       context: ./requirements/bonus/vsftpd
     volumes:
-      - /home/jiyan/data/wordpress:/var/www/html
+      - /home/jiyanwang/data/wordpress:/var/www/html
     environment:
       - FTP_USER=${FTP_USER}
       - FTP_PASS=${FTP_PASS}
@@ -102,7 +102,7 @@ services:
       context: ./requirements/bonus/portainer
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /home/jiyan/data/portainer:/data
+      - /home/jiyanwang/data/portainer:/data
     networks:
       - inception
     ports:

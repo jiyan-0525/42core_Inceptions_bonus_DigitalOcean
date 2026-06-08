@@ -6,7 +6,8 @@ Once the containers are running, you can access the services:
 
 | Service | URL / Access |
 | :--- | :--- |
-| **WordPress** | [https://127.0.0.1](https://127.0.0.1) |
+| **WordPress** | [https://127.0.0.1](https://127.0.0.1) 
+|               | [https://jiyan.42.fr](https://jiyan.42.fr)
 | **Portfolio (CV)** | [https://127.0.0.1/portfolio](https://127.0.0.1/portfolio) |
 | **Adminer** | [https://127.0.0.1/adminer](https://127.0.0.1/adminer) |
 | **Portainer** | [https://localhost:9443](https://localhost:9443) ```run frist:  docker restart portainer ```|

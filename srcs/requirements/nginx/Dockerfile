@@ -10,7 +10,7 @@ RUN mkdir -p /etc/nginx/ssl
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/nginx/ssl/inception.key \
     -out /etc/nginx/ssl/inception.crt \
-    -subj "/C=DE/ST=BW/L=Heilbronn/O=42/OU=42Heilbronn/CN=jiyan42"
+    -subj "/C=DE/ST=BW/L=Heilbronn/O=42/OU=42Heilbronn/CN=jiyan.42.fr"
 
 # 将本地写好的配置文件复制到容器中
 COPY conf/nginx.conf /etc/nginx/sites-available/default

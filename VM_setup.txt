@@ -27,12 +27,13 @@ echo "https://dl-cdn.alpinelinux.org/alpine/latest-stable/main" >> /etc/apk/repo
 apk update
 apk add fish
 
-###Deban
+###Debian
 
 jiyanwang
 123456
 
-ssh root@127.0.0.1 -p 4243
+ssh jiyanwang@127.0.0.1 -p 4243
+
 VM net: Host Port:4243 GUest Port:4242
 /etc/ssh/sshd_config: Port:4242
 

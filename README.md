@@ -90,7 +90,7 @@ https://docs.docker.com/compose/
 
 https://nginx.org/en/docs/index.html
 
-https://dev.to/alejiri/docker-nginx-wordpress-mariadb-tutorial-inception42-1eok
+https://wordpress.com/blog/2022/11/14/setting-up-your-local-development-environment-for-wordpress/
 
 ## Project description
 

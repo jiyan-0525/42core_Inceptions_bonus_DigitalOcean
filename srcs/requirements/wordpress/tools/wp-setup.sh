@@ -3,81 +3,79 @@ set -e
 
 WP_PATH="/var/www/html"
 
-# Read password from secret file
+echo "Starting WordPress setup..."
+
+# Load DB password from Docker secret
 if [ -n "$WORDPRESS_DB_PASSWORD_FILE" ] && [ -f "$WORDPRESS_DB_PASSWORD_FILE" ]; then
-    WORDPRESS_DB_PASSWORD=$(cat "$WORDPRESS_DB_PASSWORD_FILE")
-    export WORDPRESS_DB_PASSWORD
+    export WORDPRESS_DB_PASSWORD="$(cat "$WORDPRESS_DB_PASSWORD_FILE")"
 fi
 
-echo "Setting up WordPress..."
-
-# Download and configure WordPress if not present
-echo "Waiting for MariaDB to be ready..."
-while ! nc -z ${WORDPRESS_DB_HOST} 3306; do
-    echo "MariaDB is not reachable yet. Sleeping..."
+# Wait for MariaDB
+echo "Waiting for MariaDB (${WORDPRESS_DB_HOST}:3306)..."
+while ! nc -z "$WORDPRESS_DB_HOST" 3306; do
+    echo "MariaDB not ready, retrying..."
     sleep 2
 done
-echo "MariaDB is up and port 3306 is open!"
+echo "MariaDB is ready!"
 
+# Install WP-CLI once
+if ! command -v wp >/dev/null 2>&1; then
+    echo "Installing WP-CLI..."
+    curl -sO https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+    chmod +x wp-cli.phar
+    mv wp-cli.phar /usr/local/bin/wp
+fi
+
+# Install WordPress if missing
 if [ ! -f "$WP_PATH/wp-config.php" ]; then
     echo "Downloading WordPress..."
-    wget -q https://wordpress.org/latest.tar.gz -O /tmp/wordpress.tar.gz
-    tar -xzf /tmp/wordpress.tar.gz -C /tmp
-    rm /tmp/wordpress.tar.gz
+    wget -q https://wordpress.org/latest.tar.gz -O /tmp/wp.tar.gz
+    tar -xzf /tmp/wp.tar.gz -C /tmp
+    cp -rn /tmp/wordpress/* "$WP_PATH"
+    rm -rf /tmp/wp.tar.gz /tmp/wordpress
 
-    # Copy only missing files (avoid overwriting existing content)
-    cp -rn /tmp/wordpress/* "$WP_PATH" || true
-    rm -rf /tmp/wordpress
-
-    # Fetch security salts from WordPress API
+    echo "Fetching WordPress salts..."
     WP_SALTS=$(wget -qO- https://api.wordpress.org/secret-key/1.1/salt/)
 
-    # Create wp-config.php
-    cat > "$WP_PATH/wp-config.php" << EOF
+    echo "Creating wp-config.php..."
+    cat > "$WP_PATH/wp-config.php" <<EOF
 <?php
-define('DB_NAME', '${MYSQL_DATABASE}');
-define('DB_USER', '${MYSQL_USER}');
-define('DB_PASSWORD', '${MYSQL_PASSWORD}');
-define('DB_HOST', '${WORDPRESS_DB_HOST}');
+define('DB_NAME', getenv('WORDPRESS_DB_NAME') ?: getenv('MYSQL_DATABASE'));
+define('DB_USER', getenv('WORDPRESS_DB_USER') ?: getenv('MYSQL_USER'));
+define('DB_PASSWORD', getenv('WORDPRESS_DB_PASSWORD') ?: getenv('MYSQL_PASSWORD'));
+define('DB_HOST', getenv('WORDPRESS_DB_HOST') ?: 'mariadb:3306');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 
-\$table_prefix = '${WORDPRESS_TABLE_PREFIX:-wp_}';
+\$table_prefix = getenv('WORDPRESS_TABLE_PREFIX') ?: 'wp_';
 
 ${WP_SALTS}
 
 define('WP_DEBUG', false);
 
-if ( !defined('ABSPATH') )
+// Redis Cache
+define('WP_REDIS_HOST', 'redis');
+define('WP_REDIS_PORT', 6379);
+
+if (!defined('ABSPATH')) {
     define('ABSPATH', __DIR__ . '/');
+}
 
 require_once ABSPATH . 'wp-settings.php';
 EOF
 
-    # Set secure permissions
-    find "$WP_PATH" -type d -exec chmod 750 {} \;
-    find "$WP_PATH" -type f -exec chmod 640 {} \;
+    echo "Setting permissions..."
+    find "$WP_PATH" -type d -exec chmod 755 {} \;
+    find "$WP_PATH" -type f -exec chmod 644 {} \;
     chown -R www-data:www-data "$WP_PATH"
 
-    # Install and configure Redis Object Cache
-    echo "Installing Redis Cache plugin..."
-    curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-    chmod +x wp-cli.phar
-    mv wp-cli.phar /usr/local/bin/wp
-    
-    # Configure WordPress for Redis
-    cat >> "$WP_PATH/wp-config.php" << EOF
-define('WP_REDIS_HOST', 'redis');
-define('WP_REDIS_PORT', 6379);
-EOF
-
-    # Install and activate the plugin
+    echo "Installing Redis plugin..."
     wp plugin install redis-cache --activate --allow-root --path="$WP_PATH"
     wp redis enable --allow-root --path="$WP_PATH"
 
-    echo "WordPress setup complete."
+    echo "WordPress installation complete."
 else
-    echo "WordPress already initialized, skipping setup."
+    echo "WordPress already installed, skipping."
 fi
 
 echo "Starting PHP-FPM..."

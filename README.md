@@ -6,7 +6,7 @@ Once the containers are running, you can access the services:
 
 | Service | URL / Access |
 | :--- | :--- |
-| **WordPress** | [https://jiyan.42.fr](https://jiyan.42.fr) 
+| **WordPress** | [https://jiyan.42.fr](https://jiyan.42.fr)
 | **Portfolio (CV)** | [https://jiyan.42.fr/portfolio](https://jiyan.42.fr/portfolio) |
 | **Adminer** | [https://jiyan.42.fr/adminer](https://jiyan.42.fr/adminer) |
 | **Portainer** | [https://jiyan.42.fr:9443](https://jiyan.42.fr:9443) ```run frist:  docker restart portainer ```|

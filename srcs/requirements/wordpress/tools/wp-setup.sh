@@ -89,8 +89,6 @@ fi
 # Enable Redis plugin only if WordPress is installed
 if wp core is-installed --allow-root --path="$WP_PATH"; then
     echo "Installing Redis plugin..."
-    wp plugin install redis-cache --activate --allow-root --path="$WP_PATH"
-    wp redis enable --allow-root --path="$WP_PATH"
 fi
 
 echo "Starting PHP-FPM..."

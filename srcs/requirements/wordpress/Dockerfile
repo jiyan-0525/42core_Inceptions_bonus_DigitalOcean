@@ -28,7 +28,7 @@ RUN chmod +x /usr/local/bin/wp-setup.sh
 RUN mkdir -p /run/php
 
 # Copy and set permissions for setup script
-CRUN chown -R www-data:www-data /var/www/html && \
+RUN chown -R www-data:www-data /var/www/html && \
     chmod -R 755 /var/www/html
 
 EXPOSE 9000

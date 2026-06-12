@@ -23,11 +23,13 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /var/www/html
 
 # Copy PHP-FPM configuration (correct version)
-COPY conf/www.conf /etc/php/8.2/fpm/pool.d/
-
-# Copy and set permissions for setup script
 COPY tools/wp-setup.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/wp-setup.sh
+RUN mkdir -p /run/php
+
+# Copy and set permissions for setup script
+CRUN chown -R www-data:www-data /var/www/html && \
+    chmod -R 755 /var/www/html
 
 EXPOSE 9000
 

@@ -2,7 +2,8 @@
 COMPOSE_FILE = srcs/docker-compose.yml
 DATA_DIR = /home/$(USER)/data
 
-all: build up
+all: build
+	docker compose -f $(COMPOSE_FILE) up -d
 
 # Create data directories
 $(DATA_DIR)/mariadb:
@@ -17,6 +18,10 @@ build: $(DATA_DIR)/mariadb $(DATA_DIR)/wordpress
 
 # Start services
 up:
+	@echo "Creating directories in $(DATA_DIR)..."
+	@mkdir -p $(DATA_DIR)/mariadb
+	@mkdir -p $(DATA_DIR)/wordpress
+	@sudo chown -R $$USER:$$USER $(DATA_DIR)
 	docker compose -f $(COMPOSE_FILE) up -d
 
 restart:
@@ -28,13 +33,13 @@ down:
 
 # Clean containers and images
 clean:
-	docker compose -f $(COMPOSE_FILE) down
-	docker system prune -af
+	docker compose -f $(COMPOSE_FILE) down --rmi all
 
 # Full clean including volumes
 fclean: clean
-	docker volume prune -f
+	docker compose -f $(COMPOSE_FILE) down -v --rmi all
 	sudo rm -rf $(DATA_DIR)
+	docker system prune -af
 
 re: fclean all
 

@@ -5,11 +5,16 @@ services:
       context: ./requirements/mariadb
     env_file:
       - .env
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD_FILE=/run/secrets/db_password
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db_root_password
+    volumes:
+      - mariadb:/var/lib/mysql
     secrets:
       - db_password
       - db_root_password
-    volumes:
-      - mariadb:/var/lib/mysql
     networks:
       - inception
     restart: unless-stopped
@@ -22,15 +27,14 @@ services:
       context: ./requirements/wordpress
     env_file:
       - .env
-    secrets:
-      - db_password
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - WORDPRESS_DB_HOST=mariadb
     volumes:
       - wordpress:/var/www/html
-    environment:
-      - WORDPRESS_DB_HOST=mariadb
-      - WORDPRESS_DB_NAME=${MYSQL_DATABASE}
-      - WORDPRESS_DB_USER=${MYSQL_USER}
-      - WORDPRESS_DB_PASSWORD=${MYSQL_PASSWORD}
+    secrets:
+      - db_password
     networks:
       - inception
     depends_on:
@@ -121,6 +125,22 @@ networks:
 
 volumes:
   mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jiyawang/data/mariadb
+      o: bind
+
   wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jiyawang/data/wordpress
+      o: bind
   portainer:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/jiyawang/data/wordpress
+      o: bind
 

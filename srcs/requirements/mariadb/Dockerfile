@@ -1,18 +1,17 @@
-FROM debian:bookworm 
+FROM debian:bookworm
 
 RUN apt-get update && apt-get install -y \
     mariadb-server \
-        && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/*
 
-        # Ensure the runtime directories exist and have correct permissions
-RUN mkdir -p /var/run/mysqld && \
-chown -R mysql:mysql /var/run/mysqld
+RUN mkdir -p /var/run/mysqld /var/log/mysql /var/lib/mysql && \
+    chown -R mysql:mysql /var/run/mysqld /var/log/mysql /var/lib/mysql
 
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 COPY ./tools/db-setup.sh /db-setup.sh
 
-RUN chmod +x /db-setup.sh
-RUN chmod 644 /etc/mysql/mariadb.conf.d/50-server.cnf
+RUN chmod +x /db-setup.sh && \
+    chmod 644 /etc/mysql/mariadb.conf.d/50-server.cnf
 
 EXPOSE 3306
 

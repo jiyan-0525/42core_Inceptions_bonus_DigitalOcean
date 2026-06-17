@@ -6,11 +6,11 @@ Once the containers are running, you can access the services:
 
 | Service | URL / Access |
 | :--- | :--- |
-| **WordPress** | [https://jiyan.42.fr](https://jiyan.42.fr)
-| **Portfolio (CV)** | [https://jiyan.42.fr/portfolio](https://jiyan.42.fr/portfolio) |
-| **Adminer** | [https://jiyan.42.fr/adminer](https://jiyan.42.fr/adminer) |
-| **Portainer** | [https://jiyan.42.fr:9443](https://jiyan.42.fr:9443) ```run frist:  docker restart portainer ```|
-| **FTP Server**  | `Port 21` (User: `jiyan`, Pass: `ftp_password`), `ftp jiyan.42.fr`  | 
+| **WordPress** | [https://jiyawang.42.fr](https://jiyawang.42.fr)
+| **Portfolio (CV)** | [https://jiyawang.42.fr/portfolio](https://jiyawang.42.fr/portfolio) |
+| **Adminer** | [https://jiyawang.42.fr/adminer](https://jiyawang.42.fr/adminer) |
+| **Portainer** | [https://jiyawang.42.fr:9443](https://jiyawang.42.fr:9443) ```run frist:  docker restart portainer ```|
+| **FTP Server**  | `Port 21` (User: `jiyan`, Pass: `ftp_password`), `ftp jiyawang.42.fr`  | 
 | **Redis Cache**                          | Integrated into WordPress |
 
 **Via SSH (for container management):**

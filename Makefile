@@ -12,16 +12,15 @@ $(DATA_DIR)/mariadb:
 $(DATA_DIR)/wordpress:
 	mkdir -p $(DATA_DIR)/wordpress
 
+$(DATA_DIR)/portainer:
+	mkdir -p $(DATA_DIR)/portainer
+
 # Build images
-build: $(DATA_DIR)/mariadb $(DATA_DIR)/wordpress
+build: $(DATA_DIR)/mariadb $(DATA_DIR)/wordpress $(DATA_DIR)/portainer
 	docker compose -f $(COMPOSE_FILE) build
 
 # Start services
 up:
-	@echo "Creating directories in $(DATA_DIR)..."
-	@mkdir -p $(DATA_DIR)/mariadb
-	@mkdir -p $(DATA_DIR)/wordpress
-	@sudo chown -R $$USER:$$USER $(DATA_DIR)
 	docker compose -f $(COMPOSE_FILE) up -d
 
 restart:
@@ -37,7 +36,6 @@ clean:
 
 # Full clean including volumes
 fclean: clean
-	docker compose -f $(COMPOSE_FILE) down -v --rmi all
 	sudo rm -rf $(DATA_DIR)
 	docker system prune -af
 

@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /var/www/html
 
 # Copy PHP-FPM configuration (correct version)
+COPY conf/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 COPY tools/wp-setup.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/wp-setup.sh
 RUN mkdir -p /run/php

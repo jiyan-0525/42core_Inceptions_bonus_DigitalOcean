@@ -17,12 +17,12 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build and push Docker-inception image
-      uses: docker/build-push-action@v6
-      with:
-        context: .
-        push: true
-        tags: jiyanwang/inception-docker-digitalocean:latest
+    # - name: Build and push Docker-inception image
+    #   uses: docker/build-push-action@v6
+    #   with:
+    #     context: .
+    #     push: true
+    #     tags: jiyanwang/inception-docker-digitalocean:latest
 
     - name: Deploy to DigitalOcean
       uses: appleboy/ssh-action@v1.0.3

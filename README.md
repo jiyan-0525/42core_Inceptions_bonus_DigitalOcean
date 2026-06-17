@@ -150,6 +150,18 @@ https://wordpress.com/blog/2022/11/14/setting-up-your-local-development-environm
 | Named volumes with driver_opts | Satisfies both subject requirements: named volume + `/home/jiyawang/data/` path |
 | Bridge network | Containers communicate by name, isolated from host |
 
+<img width="1842" height="855" alt="wordpress" src="https://github.com/user-attachments/assets/4c8f212e-211d-46d3-9c7f-b9787fe1cc72" />
+
+<img width="1860" height="575" alt="adminer" src="https://github.com/user-attachments/assets/3aa1f85b-aed3-466a-9d8e-c91c9bb90dbd" />
+<img width="1855" height="869" alt="adminer1" src="https://github.com/user-attachments/assets/2da572a8-e13b-4ddc-ad68-bb39cee2362a" />
+
+<img width="1860" height="847" alt="portainer" src="https://github.com/user-attachments/assets/42e737c6-5b84-472c-8cc9-ad2dbb8442c6" />
+
+
+
+
+
+
 ---
 
 ## AI Usage

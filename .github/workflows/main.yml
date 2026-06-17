@@ -1,0 +1,60 @@
+name: 🚀 Inception - Deploy to DigitalOcean
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test-build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v6
+      with:
+        context: .
+        push: true
+        # 保持你的 Docker Hub 镜像标签
+        tags: jiyanwang/42core_Inceptions_bonus_DigitalOcean:latest 
+
+    # 注释掉或保留本地测试：如果本地测试失败，可能是因为缺少宿主机路径上的挂载文件（如 nginx.conf）
+    # - name: Test container
+    #   run: |
+    #     docker compose up -d
+    #     sleep 10
+    #     curl -f http://localhost || exit 1
+    #     docker compose down
+
+    - name: Deploy to DigitalOcean
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: "46.101.164.165" # 已修正为正确的服务器 IP
+        username: root
+        key: ${{ secrets.DO_SSH_KEY }}
+        port: 22
+        script: |
+          # 1. 进入服务器上正确的项目目录
+          cd ~/42core_Inceptions_bonus_DigitalOcean
+          
+          # 2. 拉取最新的代码（确保 nginx.conf 和最新的 HTML 被更新到服务器宿主机）
+          git pull origin main
+          
+          # 3. 停止当前运行的旧容器
+          docker compose down
+          
+          # 4. 拉取刚才在 GitHub Actions 中构建并推送到 Docker Hub 的最新后端镜像
+          docker compose pull
+          
+          # 5. 重新启动整个多容器服务栈（包括挂载了最新 HTML 的 Nginx）
+          docker compose up -d
+          
+          # 6. 清理无用的旧镜像占用的磁盘空间
+          docker image prune -f

@@ -144,11 +144,16 @@ https://wordpress.com/blog/2022/11/14/setting-up-your-local-development-environm
 | Choice | Reason |
 | :--- | :--- |
 | `debian:bullseye` / `debian:bookworm` | Stable, well documented, required by subject |
-| php-fpm instead of Apache | Lighter, works well with NGINX as reverse proxy |
 | WP-CLI for WordPress setup | Allows automated installation without browser |
 | Docker secrets for passwords | More secure than environment variables |
 | Named volumes with driver_opts | Satisfies both subject requirements: named volume + `/home/jiyawang/data/` path |
 | Bridge network | Containers communicate by name, isolated from host |
+| DigitalOcean VM | Can open in a standard browser |
+| 42 School | Inception project run without GUI due to disk space limitations |
+
+#### *** I completed the Inception project with the bonus requirements on DigitalOcean. However, when I ran the project at 42 School, I had to delete the bonus parts due to disk space limitations. Since I didn't have a GUI available, I had to access the website using w3m directly in the terminal. ***
+#### DigitalOcean deployment demo:
+
 
 WordPress:    https://jiyawang.42.fr
 

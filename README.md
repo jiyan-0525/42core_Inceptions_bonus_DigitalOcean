@@ -11,6 +11,11 @@ Inception is a system administration project from the 42 curriculum. The goal is
 | **NGINX** | Reverse proxy, only entrypoint via HTTPS (port 443) |
 | **WordPress** | CMS with php-fpm, no web server |
 | **MariaDB** | Database for WordPress |
+| **adminer** | Database management |
+| **portfolio** | Portfolio website |
+| **portaine** | Docker container management |
+| **redis**| Cache for WordPress |
+|**ftp** | File management service |
 
 ## Project Structure
 

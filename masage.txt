@@ -1,0 +1,7 @@
+Service	URL / Access
+WordPress	https://jiyan.42.fr
+Portfolio (CV)	https://jiyan.42.fr/portfolio
+Adminer	https://jiyan.42.fr/adminer
+Portainer	https://jiyan.42.fr:9443 run frist: docker restart portainer
+FTP Server	Port 21 (User: jiyan, Pass: ftp_password), ftp jiyan.42.fr
+Redis Cache	Integrated into WordPress

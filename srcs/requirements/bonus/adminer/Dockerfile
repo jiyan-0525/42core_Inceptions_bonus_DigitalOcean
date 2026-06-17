@@ -20,4 +20,8 @@ COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 EXPOSE 9000
 
 # Start PHP-FPM
+<<<<<<< HEAD
 CMD ["php-fpm7.4", "-F"]
+=======
+CMD ["php-fpm7.4", "-F"]
+>>>>>>> 8d6f6e3 (addbons)

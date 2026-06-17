@@ -39,6 +39,51 @@ services:
     expose:
       - "9000"
 
+<<<<<<< HEAD
+=======
+  redis:
+    container_name: redis
+    build:
+      context: ./requirements/bonus/redis
+    networks:
+      - inception
+    restart: unless-stopped
+
+  adminer:
+    container_name: adminer
+    build:
+      context: ./requirements/bonus/adminer
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+    restart: unless-stopped
+
+  cv:
+    container_name: cv
+    build:
+      context: ./requirements/bonus/cv
+    networks:
+      - inception
+    restart: unless-stopped
+
+  ftp-server:
+    container_name: ftp-server
+    build:
+      context: ./requirements/bonus/vsftpd
+    volumes:
+      - wordpress:/var/www/html
+    environment:
+      - FTP_USER=${FTP_USER}
+      - FTP_PASS=${FTP_PASS}
+    ports:
+      - "21:21"
+      - "21100-21110:21100-21110"
+    networks:
+      - inception
+    restart: unless-stopped
+
+>>>>>>> 8d6f6e3 (addbons)
   nginx:
     container_name: nginx
     build:

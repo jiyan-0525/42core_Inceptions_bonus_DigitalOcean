@@ -5,38 +5,67 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    # 这里不需要 self-hosted，使用 GitHub 提供的 ubuntu-latest 即可
+    runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
-    - name: Deplpy Services
-      uses: docker/login-action@v3
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-
-    # - name: Build and push Docker-inception image
-    #   uses: docker/build-push-action@v6
-    #   with:
-    #     context: .
-    #     push: true
-    #     tags: jiyanwang/inception-docker-digitalocean:latest
-
     - name: Deploy to DigitalOcean
       uses: appleboy/ssh-action@v1.0.3
       with:
         host: "46.101.164.165"
-        username: root
+        username: jiyawang
         key: ${{ secrets.DO_SSH_KEY }}
         port: 22
         script: |
           cd ~/42core_Inceptions_bonus_DigitalOcean
           git pull origin main
-          # Log in to Docker Hub on the server
+          # 仅在服务器上登录 Docker Hub (如果你的 Dockerfile 需要从私有库拉取镜像)
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
           docker compose down
-          docker compose pull
+          # 如果你在服务器本地构建，--build 足够了，无需 pull
           docker compose up -d --build
           docker image prune -f
+
+
+# name: 🚀 Inception - Deploy to DigitalOcean
+# on:
+#   push:
+#     branches: [ main ]
+
+# jobs:
+#   deploy:
+#     runs-on: self-hosted
+
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v4
+
+#     - name: Deplpy Services
+#       uses: docker/login-action@v3
+#       with:
+#         username: ${{ secrets.DOCKER_USERNAME }}
+#         password: ${{ secrets.DOCKER_PASSWORD }}
+
+#     # - name: Build and push Docker-inception image
+#     #   uses: docker/build-push-action@v6
+#     #   with:
+#     #     context: .
+#     #     push: true
+#     #     tags: jiyanwang/inception-docker-digitalocean:latest
+
+#     - name: Deploy to DigitalOcean
+#       uses: appleboy/ssh-action@v1.0.3
+#       with:
+#         host: "46.101.164.165"
+#         username: root
+#         key: ${{ secrets.DO_SSH_KEY }}
+#         port: 22
+#         script: |
+#           cd ~/42core_Inceptions_bonus_DigitalOcean
+#           git pull origin main
+#           # Log in to Docker Hub on the server
+#           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+#           docker compose down
+#           docker compose pull
+#           docker compose up -d --build
+#           docker image prune -f

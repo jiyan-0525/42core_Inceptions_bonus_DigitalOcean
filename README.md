@@ -158,7 +158,7 @@ WordPress:    https://jiyawang.42.fr
 
 <img width="1842" height="855" alt="wordpress" src="https://github.com/user-attachments/assets/4c8f212e-211d-46d3-9c7f-b9787fe1cc72" />
 
-adminer	(Database management):    https://jiyawang.42.fr/adminer
+Adminer	(Database management):    https://jiyawang.42.fr/adminer
 
 <img width="1860" height="575" alt="adminer" src="https://github.com/user-attachments/assets/3aa1f85b-aed3-466a-9d8e-c91c9bb90dbd" />
 
@@ -168,7 +168,7 @@ Portfolio website:    https://jiyawang.42.fr/portfolio
 
 <img width="1681" height="822" alt="cv" src="https://github.com/user-attachments/assets/46513fcc-bcf5-441a-a424-96b03075bcd2" />
 
-portainer	(Docker container management):    https://jiyawang.42.fr:9443
+Portainer	(Docker container management):    https://jiyawang.42.fr:9443
 <img width="1860" height="847" alt="portainer" src="https://github.com/user-attachments/assets/42e737c6-5b84-472c-8cc9-ad2dbb8442c6" />
 
 

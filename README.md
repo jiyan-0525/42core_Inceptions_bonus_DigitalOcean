@@ -145,14 +145,6 @@ All containers communicate through container names (e.g., `wordpress:9000`, `mar
 
 This project uses named volumes
 
-## Resources
-https://docs.docker.com/get-started/docker-overview/
-
-https://docs.docker.com/compose/
-
-https://nginx.org/en/docs/index.html
-
-https://wordpress.com/blog/2022/11/14/setting-up-your-local-development-environment-for-wordpress/
 
 ## Features
 
@@ -176,6 +168,14 @@ https://wordpress.com/blog/2022/11/14/setting-up-your-local-development-environm
 | DigitalOcean VM | Can open in a standard browser |
 | 42 School | Inception project run without GUI due to disk space limitations |
 
+## Resources
+https://docs.docker.com/get-started/docker-overview/
+
+https://docs.docker.com/compose/
+
+https://nginx.org/en/docs/index.html
+
+https://wordpress.com/blog/2022/11/14/setting-up-your-local-development-environment-for-wordpress/
 
 ## AI Usage
 

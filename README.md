@@ -37,9 +37,9 @@ Portainer	(Docker container management):    https://jiyawang.42.fr:9443
 | **MariaDB** | Database for WordPress |
 | **adminer** | Database management |
 | **portfolio** | Portfolio website |
-| **portaine** | Docker container management |
+| **portainer** | Docker container management |
 | **redis**| Cache for WordPress |
-|**ftp** | File management service |
+| **ftp** | File management service |
 
 ## Project Structure
 

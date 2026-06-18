@@ -130,7 +130,9 @@ In this project:
 | Security | ✅ More secure | ❌ Less secure |
 | Subject requirement | ✅ Required | ❌ Forbidden |
 
-This project uses a custom bridge network called `inception`. All containers communicate through container names (e.g., `wordpress:9000`, `mariadb:3306`).
+This project uses a custom bridge network called `inception`. 
+
+All containers communicate through container names (e.g., `wordpress:9000`, `mariadb:3306`).
 
 ####  ◦ Docker Volumes vs Bind Mounts
 

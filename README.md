@@ -26,7 +26,6 @@ Inception is a system administration project from the 42 curriculum. The goal is
 ├── README.md
 ├── USER_DC.md
 ├── secrets
-│   ├── credentials.txt
 │   ├── db_password.txt
 │   └── db_root_password.txt
 └── srcs

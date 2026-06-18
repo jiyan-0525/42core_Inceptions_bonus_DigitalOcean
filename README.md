@@ -4,6 +4,30 @@
 
 Inception is a system administration project from the 42 curriculum. The goal is to set up a small infrastructure composed of different services running inside Docker containers, orchestrated with Docker Compose, all inside a virtual machine.
 
+I completed the Inception project with the bonus requirements on DigitalOcean. However, when I ran the project at 42 School, I had to delete the bonus parts due to disk space limitations. Since I didn't have a GUI available, I had to access the website using w3m directly in the terminal.
+
+#### DigitalOcean deployment demo:
+
+
+WordPress:    https://jiyawang.42.fr
+
+<img width="1842" height="855" alt="wordpress" src="https://github.com/user-attachments/assets/4c8f212e-211d-46d3-9c7f-b9787fe1cc72" />
+
+Adminer	(Database management):    https://jiyawang.42.fr/adminer
+
+<img width="1860" height="575" alt="adminer" src="https://github.com/user-attachments/assets/3aa1f85b-aed3-466a-9d8e-c91c9bb90dbd" />
+
+<img width="1855" height="869" alt="adminer1" src="https://github.com/user-attachments/assets/2da572a8-e13b-4ddc-ad68-bb39cee2362a" />
+
+Portfolio website:    https://jiyawang.42.fr/portfolio
+
+<img width="1681" height="822" alt="cv" src="https://github.com/user-attachments/assets/46513fcc-bcf5-441a-a424-96b03075bcd2" />
+
+Portainer	(Docker container management):    https://jiyawang.42.fr:9443
+<img width="1860" height="847" alt="portainer" src="https://github.com/user-attachments/assets/42e737c6-5b84-472c-8cc9-ad2dbb8442c6" />
+
+
+---
 ### Services included
 
 | Service | Role |
@@ -150,29 +174,6 @@ https://wordpress.com/blog/2022/11/14/setting-up-your-local-development-environm
 | DigitalOcean VM | Can open in a standard browser |
 | 42 School | Inception project run without GUI due to disk space limitations |
 
-#### *** I completed the Inception project with the bonus requirements on DigitalOcean. However, when I ran the project at 42 School, I had to delete the bonus parts due to disk space limitations. Since I didn't have a GUI available, I had to access the website using w3m directly in the terminal. ***
-#### DigitalOcean deployment demo:
-
-
-WordPress:    https://jiyawang.42.fr
-
-<img width="1842" height="855" alt="wordpress" src="https://github.com/user-attachments/assets/4c8f212e-211d-46d3-9c7f-b9787fe1cc72" />
-
-Adminer	(Database management):    https://jiyawang.42.fr/adminer
-
-<img width="1860" height="575" alt="adminer" src="https://github.com/user-attachments/assets/3aa1f85b-aed3-466a-9d8e-c91c9bb90dbd" />
-
-<img width="1855" height="869" alt="adminer1" src="https://github.com/user-attachments/assets/2da572a8-e13b-4ddc-ad68-bb39cee2362a" />
-
-Portfolio website:    https://jiyawang.42.fr/portfolio
-
-<img width="1681" height="822" alt="cv" src="https://github.com/user-attachments/assets/46513fcc-bcf5-441a-a424-96b03075bcd2" />
-
-Portainer	(Docker container management):    https://jiyawang.42.fr:9443
-<img width="1860" height="847" alt="portainer" src="https://github.com/user-attachments/assets/42e737c6-5b84-472c-8cc9-ad2dbb8442c6" />
-
-
----
 
 ## AI Usage
 

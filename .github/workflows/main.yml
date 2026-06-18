@@ -13,7 +13,7 @@ jobs:
       uses: appleboy/ssh-action@v1.0.3
       with:
         host: "46.101.164.165"
-        username: jiyawang
+        username: root
         key: ${{ secrets.DO_SSH_KEY }}
         port: 22
         script: |

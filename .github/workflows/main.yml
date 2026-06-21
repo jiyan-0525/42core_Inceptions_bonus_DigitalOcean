@@ -51,7 +51,7 @@ jobs:
       with:
         workdir: ./srcs
         files: docker-compose.yml
-        push: false
+        push: true
 
     - name: Inception Deploy to DigitalOcean
       uses: appleboy/ssh-action@v1.0.3

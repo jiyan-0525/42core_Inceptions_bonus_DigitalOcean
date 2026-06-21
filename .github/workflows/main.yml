@@ -49,7 +49,8 @@ jobs:
     - name: Build all images with Build Summary support
       uses: docker/bake-action@v5
       with:
-        files: ./srcs/docker-compose.yml
+        workdir: ./srcs
+        files: docker-compose.yml
         push: false
 
     - name: Inception Deploy to DigitalOcean

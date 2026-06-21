@@ -1,5 +1,6 @@
 services:
   mariadb:
+    image: jiyanwang/inception-mariadb:latest
     container_name: mariadb
     build:
       context: ./requirements/mariadb
@@ -22,6 +23,7 @@ services:
       - "3306"
 
   wordpress:
+    image: jiyanwang/inception-wordpress:latest
     container_name: wordpress
     build:
       context: ./requirements/wordpress
@@ -44,6 +46,7 @@ services:
       - "9000"
 
   nginx:
+    image: jiyanwang/inception-nginx:latest
     container_name: nginx
     build:
       context: ./requirements/nginx
@@ -59,6 +62,7 @@ services:
     restart: unless-stopped
 
   redis:
+    image: jiyanwang/inception-redis:latest
     container_name: redis
     build:
       context: ./requirements/bonus/redis
@@ -67,6 +71,7 @@ services:
     restart: unless-stopped
 
   adminer:
+    image: jiyanwang/inception-adminer:latest
     container_name: adminer
     build:
       context: ./requirements/bonus/adminer
@@ -77,6 +82,7 @@ services:
     restart: unless-stopped
 
   ftp-server:
+    image: jiyanwang/inception-ftp:latest
     container_name: ftp-server
     build:
       context: ./requirements/bonus/vsftpd
@@ -93,6 +99,7 @@ services:
     restart: unless-stopped
 
   portfolio:
+    image: jiyanwang/inception-portfolio:latest
     container_name: portfolio
     build:
       context: ./requirements/bonus/portfolio
@@ -101,6 +108,7 @@ services:
     restart: unless-stopped
 
   portainer:
+    image: jiyanwang/inception-portainer:latest
     container_name: portainer
     build:
       context: ./requirements/bonus/portainer

@@ -71,7 +71,7 @@ WORDPRESS_DB_HOST=mariadb
 ```bash
 sudo nano /etc/hosts
 # Add this line:
-46.101.164.165/127.0.0.1   jiyawang.42.fr
+46.101.164.165   jiyawang.42.fr
 ```
 ---
 

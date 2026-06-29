@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- VirtualBox (Debian Linux VM)
+- VirtualBox (Debian 13 x64 DgitalOcean)
 - SSH access to the VM
 - Docker & Docker Compose installed on the VM
 - `make` installed
@@ -12,7 +12,7 @@
 ## 1. Connect to the VM
 
 ```bash
-ssh jiyawang@127.0.0.1 -p 4243
+ssh jiyawang@46.101.164.165
 ```
  ⚠️ If Connection closed by 127.0.0.1 port 4243
 

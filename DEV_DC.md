@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- VirtualBox (Debian 13 x64 DgitalOcean)
+- VM DgitalOcean ((Debian 13 x64)
 - SSH access to the VM
 - Docker & Docker Compose installed on the VM
 - `make` installed

@@ -14,14 +14,6 @@
 ```bash
 ssh jiyawang@46.101.164.165
 ```
- ⚠️ If Connection closed by 127.0.0.1 port 4243
-
-  Change the port to #port 4243:
-
-```bah
-sudo nano /etc/ssh/sshd_config
-```
-
 ---
 ## 2. Add user to Docker group (first time only)
 

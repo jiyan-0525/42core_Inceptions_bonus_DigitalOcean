@@ -176,22 +176,3 @@ https://docs.docker.com/compose/
 https://nginx.org/en/docs/index.html
 
 https://wordpress.com/blog/2022/11/14/setting-up-your-local-development-environment-for-wordpress/
-
-## AI Usage
-
-AI was used as a learning and debugging assistant throughout this project. Below is a honest description of how it was used:
-
-### Concept Learning and Debugging
-- Asked AI to explain like:
-    - what Docker is and how it differs from a Virtual Machine
-    - PID 1 and why `tail -f /dev/null` is a bad practice in containers
-    - the difference between bind mounts and named volumes
-    - Docker secrets vs environment variables
-    - to review my configuration files for all of the subject requirements
-
-### What I did myself
-- All final implementation decisions
-- Writing and testing all Dockerfiles and entrypoint scripts
-- Setting up the VirtualBox VM and network configuration
-- Debugging container connectivity issues
-- All Git commits and project structure

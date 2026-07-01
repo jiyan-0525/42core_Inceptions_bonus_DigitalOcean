@@ -49,9 +49,6 @@ Portainer	(Docker container management):    https://jiyawang.42.fr:9443
 ├── Makefile
 ├── README.md
 ├── USER_DC.md
-├── secrets
-│   ├── db_password.txt
-│   └── db_root_password.txt
 └── srcs
     ├── docker-compose.yml
     └── requirements

@@ -11,8 +11,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Create .env file
-      run: echo "${{ secrets.ENV }}" > .env
+    - name: Prepare .env file
+      run: |
+        echo "${{ secrets.ENV }}" > .env
+        cp .env srcs/.env
 
     - name: Login to Docker Hub
       uses: docker/login-action@v3
@@ -20,7 +22,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build all images with Build Summary support
+    - name: Build all images
       uses: docker/bake-action@v5
       with:
         workdir: ./srcs
@@ -37,6 +39,51 @@ jobs:
         script: |
           cd ~/42core_Inceptions_bonus_DigitalOcean
           git pull origin main
+          # 在服务器上也需要确保 .env 存在
+          echo "${{ secrets.ENV }}" > .env
           docker compose -f srcs/docker-compose.yml down
           docker compose -f srcs/docker-compose.yml up -d --build
           docker image prune -f
+
+# name: 🚀 Inception - Deploy to DigitalOcean
+# on:
+#   push:
+#     branches: [ main ]
+
+# jobs:
+#   deploy-to-digitalocean:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v4
+
+#     - name: Create .env file
+#       run: echo "${{ secrets.ENV }}" > .env
+
+#     - name: Login to Docker Hub
+#       uses: docker/login-action@v3
+#       with:
+#         username: ${{ secrets.DOCKER_USERNAME }}
+#         password: ${{ secrets.DOCKER_PASSWORD }}
+
+#     - name: Build all images with Build Summary support
+#       uses: docker/bake-action@v5
+#       with:
+#         workdir: ./srcs
+#         files: docker-compose.yml
+#         push: false
+
+#     - name: Inception Deploy to DigitalOcean
+#       uses: appleboy/ssh-action@v1.0.3
+#       with:
+#         host: "46.101.164.165"
+#         username: jiyawang
+#         key: ${{ secrets.DO_SSH_KEY }}
+#         port: 22
+#         script: |
+#           cd ~/42core_Inceptions_bonus_DigitalOcean
+#           git pull origin main
+#           docker compose -f srcs/docker-compose.yml down
+#           docker compose -f srcs/docker-compose.yml up -d --build
+#           docker image prune -f

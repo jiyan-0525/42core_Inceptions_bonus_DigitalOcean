@@ -2,9 +2,8 @@
 
 ## Description
 
-Inception is a system administration project from the 42 curriculum. The goal is to set up a small infrastructure composed of different services running inside Docker containers, orchestrated with Docker Compose, all inside a virtual machine.
-
-I completed the Inception project with the bonus requirements on DigitalOcean. However, when I ran the project at 42 School, I had to delete the bonus parts due to disk space limitations. Since I didn't have a GUI available, I had to access the website using w3m directly in the terminal.
+Inception is a system administration project from the 42 curriculum. The goal is to set up a small infrastructure composed of different services running inside Docker containers, orchestrated with Docker Compose, all inside a virtual machine(DigitcalOcean).
+Due to disk space limitations in the 42 campus environment, the bonus services were not kept in the local submission. A full bonus deployment is available on DigitalOcean.
 
 #### DigitalOcean deployment demo:
 

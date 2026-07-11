@@ -114,7 +114,7 @@ This project runs Docker inside a Virtual Machine (VirtualBox + Debian) as requi
 | :--- | :--- | :--- |
 | Stored in | `.env` file / shell | `/run/secrets/` inside container |
 | Visible in | `docker inspect` | Only to the specific container |
-| Safe for passwords | ❌ No | ✅ Yes |
+| Safe for passwords |  No | Yes |
 | Use case | Non-sensitive config | Passwords, API keys |
 
 In this project:
@@ -125,10 +125,10 @@ In this project:
 
 | | Docker Network | Host Network |
 | :--- | :--- | :--- |
-| Isolation | ✅ Containers isolated | ❌ Shares host network |
+| Isolation |  Containers isolated |  Shares host network |
 | Container communication | By container name (DNS) | By localhost |
-| Security | ✅ More secure | ❌ Less secure |
-| Subject requirement | ✅ Required | ❌ Forbidden |
+| Security |  More secure |  Less secure |
+| Subject requirement |  Required |  Forbidden |
 
 This project uses a custom bridge network called `inception`. 
 
@@ -139,8 +139,8 @@ All containers communicate through container names (e.g., `wordpress:9000`, `mar
 | | Docker Volumes | Bind Mounts |
 | :--- | :--- | :--- |
 | Path control | Docker manages it | You specify the path |
-| Portability | ✅ Works anywhere | ❌ Path must exist on host |
-| Subject requirement | ✅ Required | ❌ Forbidden |
+| Portability |  Works anywhere |  Path must exist on host |
+| Subject requirement |  Required |  Forbidden |
 | Data location | `/var/lib/docker/volumes/` | Any host path |
 
 This project uses named volumes

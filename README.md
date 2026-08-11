@@ -2,6 +2,10 @@
 
 ## Description
 
+### Containerized WordPress Infrastructure on DigitalOcean
+
+#### Production-style multi-container infrastructure deployed on a DigitalOcean VM using Docker Compose, NGINX and HTTPS.
+
 Inception is a system administration project from the 42 curriculum. The goal is to set up a small infrastructure composed of different services running inside Docker containers, orchestrated with Docker Compose, all inside a virtual machine(DigitcalOcean).
 
 Due to disk space limitations in the 42 campus environment, the bonus services were not kept in the local submission. A full bonus deployment is available on DigitalOcean.

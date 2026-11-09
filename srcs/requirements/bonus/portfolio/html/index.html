@@ -1,852 +1,807 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="color-scheme" content="light">
-        <meta name="supported-color-schemes" content="light">
-        <title>Jiyan Wang @ 42 Heilbronn</title>
-        <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
-        <style>
-            :root {
-                 --bg: #202022;
-                --surface: #2c2c31;
-                --border: #1e1e2e;
-                --accent: #00e5ff;
-                --accent2: #7c3aed;
-                --text: #6ba3ec;
-                --muted: #cbd0d6;
-                --green: #10b981;
-            }
-
-            *{
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-
-            html {
-                color-scheme: light;
-            }
-
-            body{
-                background-color: var(--bg);
-                color: var(--text);
-                font-family: 'DM Sans', sans-serif;
-                line-height: 1.6;
-                min-height: 100vh;
-            }
-
-            body::before {
-                content: '';
-                position: fixed;
-                inset: 0;
-                background-image: linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
-                background-size: 40px 40px;
-                pointer-events: none;
-                z-index: 0;
-            }
-
-              .container {
-                max-width: 900px;
-                margin: 0 auto;
-                padding: 60px 24px;
-                position: relative;
-                z-index: 1;
-            }
-
-             header {
-                display: grid;
-                grid-template-columns: 1fr auto;
-                gap: 40px;
-                align-items: start;
-                margin-bottom: 10px; /* 调小 */
-                padding-bottom: 40px;
-                border-bottom: 1px solid var(--border);
-            }
-
-            .status-badge {
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                background: rgba(16,185,129,0.1);
-                border: 1px solid rgba(16,185,129,0.3);
-                color: var(--green);
-                padding: 4px 12px;
-                border-radius: 100px;
-                font-family: 'Space Mono', monospace;
-                font-size: 11px;
-                margin-bottom: 16px;
-            }
-
-            .status-dot {
-                width: 6px;
-                height: 6px;
-                background: var(--green);
-                border-radius: 50%;
-                animation: pulse 2s infinite;
-            }
-
-            @keyframes pulse {
-                0%, 100% {
-                    opacity: 1;
-                }
-
-                50% {
-                    opacity: 0.3;
-                }
-            }
-
-            h1 {
-                font-family: 'Space Mono', monospace;
-                font-size: 30px;
-                font-weight: 700;
-                color: var(--text);
-                line-height: 1.1;
-                margin-bottom: 8px;
-            }
-
-            h1 span {
-                color: var(--accent);
-            }
-
-             .tagline {
-                font-size: 16px;
-                color: var(--muted);
-                margin-bottom: 24px;
-            }
-
-            .contacts {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 12px;
-                overflow-x: auto;
-            }
-
-            .contact-item {
-                display: flex;
-                align-items: center;
-                gap: 6px;
-                color: var(--muted);
-                font-size: 13px;
-                font-family: 'Space Mono', monospace;
-                white-space: nowrap;
-                flex-shrink: 0;
-            }
-
-            .contact-item span {
-                color: var(--accent);
-            }
-
-            .header-right {
-                text-align: right;
-                padding-left: 40px;
-            }
-
-            .location-box {
-                background: var(--surface);
-                border: 1px solid var(--border);
-                border-radius: 12px;
-                padding: 16px 20px;
-                font-family: 'Space Mono', monospace;
-                font-size: 12px;
-                width: 230px;
-                height: 85px;
-            }
-
-            .location-box .city {
-                font-size: 20px;
-                color: var(--text);
-                font-weight: 700;
-                display: block;
-                margin-bottom: 4px;
-            }
-
-            /* SECTIONS */
-            section {
-                margin-bottom: 30px;
-            }
-
-            .section-header {
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                margin-bottom: 22px;
-            }
-
-            .section-label {
-                font-family: 'Space Mono', monospace;
-                font-size: 14px;
-                letter-spacing: 3px;
-                text-transform: uppercase;
-                color: var(--accent);
-            }
-
-            .section-line {
-                flex: 1;
-                height: 1px;
-                background: var(--border);
-            }
-
-            /* TECH STACK */
-            .tech-grid {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-
-            .tech-tag {
-                background: var(--surface);
-                border: 1px solid var(--border);
-                color: var(--text);
-                padding: 6px 14px;
-                border-radius: 6px;
-                font-family: 'Space Mono', monospace;
-                font-size: 14px;
-                transition: all 0.2s;
-                cursor: default;
-            }
-
-            .tech-tag:hover {
-                border-color: var(--accent);
-                color: var(--accent);
-                background: rgba(0,229,255,0.05);
-            }
-
-            .tech-tag.highlight {
-                border-color: var(--accent2);
-                color: #a78bfa;
-                background: rgba(124,58,237,0.1);
-            }
-
-            /* PROJECTS */
-            .projects-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 16px;
-            }
-
-            .project-card {
-                background: var(--surface);
-                border: 1px solid var(--border);
-                border-radius: 12px;
-                padding: 20px;
-                transition: all 0.2s;
-                position: relative;
-                overflow: hidden;
-            }
-
-            .project-card::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 2px;
-                background: linear-gradient(90deg, var(--accent), var(--accent2));
-                opacity: 0;
-                transition: opacity 0.2s;
-            }
-
-            .project-card:hover {
-                border-color: rgba(0,229,255,0.3);
-                transform: translateY(-2px);
-            }
-
-            .project-card:hover::before {
-                opacity: 1;
-            }
-
-            .project-name {
-                font-family: 'Space Mono', monospace;
-                font-size: 14px;
-                color: var(--text);
-                font-weight: 700;
-                margin-bottom: 6px;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-            }
-
-            .next-badge {
-                font-size: 9px;
-                background: rgba(0,229,255,0.1);
-                border: 1px solid rgba(0,229,255,0.3);
-                color: var(--accent);
-                padding: 2px 6px;
-                border-radius: 4px;
-                letter-spacing: 1px;
-            }
-
-            .project-desc {
-                font-size: 13px;
-                color: var(--muted);
-                margin-bottom: 12px;
-            }
-
-             .project-tags {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 6px;
-            }
-
-            .ptag {
-                font-size: 10px;
-                font-family: 'Space Mono', monospace;
-                background: rgba(255,255,255,0.05);
-                padding: 3px 8px;
-                border-radius: 4px;
-                color: var(--muted);
-            }
-
-            /* TIMELINE */
-            .timeline {
-                display: flex;
-                flex-direction: column;
-                gap: 0;
-            }
-
-            .timeline-item {
-                display: grid;
-                grid-template-columns: 120px 1px 1fr;
-                gap: 0 24px;
-                position: relative;
-            }
-
-            .timeline-date {
-                font-family: 'Space Mono', monospace;
-                font-size: 11px;
-                color: var(--muted);
-                padding-top: 2px;
-                text-align: right;
-            }
-
-            .timeline-line {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 0;
-            }
-
-            .timeline-dot {
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                background: var(--accent);
-                flex-shrink: 0;
-                margin-top: 6px;
-            }
-
-            .timeline-connector {
-                width: 1px;
-                flex: 1;
-                background: var(--border);
-                min-height: 30px;
-            }
-
-            .timeline-item:last-child .timeline-connector {
-                display: none;
-            }
-
-            .timeline-content {
-                padding-bottom: 20px;
-            }
-
-            .timeline-title {
-                font-weight: 700;
-                color: var(--text);
-                font-size: 15px;
-                margin-bottom: 2px;
-            }
-
-            .timeline-org {
-                font-family: 'Space Mono', monospace;
-                font-size: 13px;
-                color: var(--accent);
-                margin-bottom: 8px;
-            }
-
-            .timeline-bullets {
-                list-style: none;
-                display: flex;
-                flex-direction: column;
-                gap: 4px;
-            }
-
-            .timeline-bullets li {
-                font-size: 14px;
-                color: var(--muted);
-                padding-left: 12px;
-                position: relative;
-            }
-
-            .timeline-bullets li::before {
-                content: '›';
-                position: absolute;
-                left: 0;
-                color: var(--accent);
-            }
-
-            /* LANGUAGES */
-            .lang-grid {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 12px;
-            }
-
-            .lang-card {
-                background: var(--surface);
-                border: 1px solid var(--border);
-                border-radius: 10px;
-                padding: 16px;
-                text-align: center;
-            }
-
-            .lang-name {
-                font-weight: 700;
-                color: var(--text);
-                font-size: 14px;
-                margin-bottom: 4px;
-            }
-
-            .lang-level {
-                font-family: 'Space Mono', monospace;
-                font-size: 11px;
-                color: var(--accent);
-            }
-
-            /* FOOTER */
-            footer {
-                text-align: center;
-                padding-top: 40px;
-                border-top: 1px solid var(--border);
-                font-family: 'Space Mono', monospace;
-                font-size: 11px;
-                color: var(--muted);
-            }
-
-            /* FADE IN */
-            @keyframes fadeUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(20px);
-                }
-
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            header, section {
-                animation: fadeUp 0.6s ease both;
-            }
-
-            section:nth-child(2) {
-                animation-delay: 0.1s;
-            }
-
-            section:nth-child(3) {
-                animation-delay: 0.2s;
-            }
-
-            section:nth-child(4) {
-                animation-delay: 0.3s;
-            }
-
-            section:nth-child(5) {
-                animation-delay: 0.4s;
-            }
-
-            @media (max-width: 640px) {
-                h1 {
-                    font-size: 32px;
-                }
-
-                header {
-                    grid-template-columns: 1fr;
-                }
-
-                .header-right {
-                    text-align: left;
-                }
-
-                .timeline-item {
-                    grid-template-columns: 80px 1px 1fr;
-                }
-            }
-
-            .photo-box img.profile-photo {
-                width: 140px;
-                height: 140px;
-                border-radius: 50%;
-                object-fit: cover;
-                object-position: center top;
-                border: 2px solid var(--accent);
-                display: block;
-                margin: 0 auto;
-                box-shadow: 0 0 30px rgba(0,229,255,0.2);
-            }
-              @media print {
-                /* Setting @page margin to 0 suppresses browser-default headers/footers
-                   (file path, date, page numbers). Padding on the body provides the
-                   actual white space so content is never flush against the edge. */
-                @page {
-                    size: A4;
-                    margin: 0;
-                }
-
-                  :root {
-                      --bg: #ffffff;
-                      --surface: #ffffff;
-                      --border: #cccccc;
-                      --text: #000000;
-                      --muted: #333333;
-                      --accent: #000000;
-                      --accent2: #000000;
-                      --green: #000000;
-                  }
-
-                  body::before {
-                      display: none !important;
-                  }
-
-                  *:not(html):not(body) {
-                      background: transparent !important;
-                      box-shadow: none !important;
-                  }
-
-                  html,
-                  body {
-                      background: #ffffff !important;
-                      margin: 0;
-                      padding: 8mm 0 10mm;
-                      box-sizing: border-box;
-                      line-height: 1.15 !important;
-                      font-size: 1.25em !important;
-                      color-scheme: only light;
-                      forced-color-adjust: none;
-                      -webkit-print-color-adjust: exact;
-                      print-color-adjust: exact;
-                  }
-
-                  .container {
-                      max-width: none;
-                      padding: 0 6mm;
-                  }
-
-                footer {
-                    break-inside: avoid;
-                    page-break-inside: avoid;
-                }
-
-            }
-             </style>
-    </head>
-    <body>
-        <div class="container">
-            <!-- HEADER -->
-            <header>
-                <div class="header-left">
-                    <div class="status-badge">
-                        <div class="status-dot"></div>
-                        Available for Internships/Jobs
-      
-                    </div>
-                    <h1>
-                        Jiyan <span>Wang</span>
-                    </h1>
-                    <div class="contacts">
-                        <div class="contact-item">
-                            <span class="email-copy" onclick="copyEmail('jiyanw825@gmail.com')" style="color:#0066cc;text-decoration:underline;display:flex;align-items:center;gap:0.5em;cursor:pointer;">
-                                <span>✉</span>
-                                <span>jiyanw825@gmail.com</span>
-                            </span>
-                            <script>
-                                function copyEmail(email) {
-                                    navigator.clipboard.writeText(email).then(() => {
-                                        alert('Email copied to clipboard: ' + email);
-                                    }).catch(err => {
-                                        console.error('Copy failed', err);
-                                    });
-                                }
-                            </script>
-                        </div>
-                        <div class="contact-item">
-                            <span>⌂</span>
-                            Feurerstraße 62, 7478 Heilbronn
-                        </div>
-                    </div>
-                </div>
-                <div class="header-right">
-                    <div class="photo-box">
-                        <img src="photo.jpg" alt="Jiyan Wang" class="profile-photo">
-                    </div>
-                    <div class="location-box" style="margin-top:12px; text-align:center">
-                        <span class="city">42 Heilbronn</span>
-                        <span class="github"><a href="https://github.com/jiyan-0525" style="color:#0066cc;text-decoration:none;display:flex;align-items:center;gap:0.5em;">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;">
-                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                                </svg>
-                                github.com/jiyan-0525
-                            </a></span>
-                    </div>
-                </div>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Jiyan Wang @ 42 Heilbronn</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --text: #e0e0e0;
+        --muted: #9ca3af;
+        --accent: #00e5ff;
+        --link: #00e5ff;
+        --purple: #7c3aed;
+        --purple-text: #a78bfa;
+        --purple-bg: rgba(124, 58, 237, .102);
+        --border: #3a3a3f;
+        --card: #2c2c31;
+        --ring: #00e5ff;
+        --green: #10b981;
+        --mono: 'Space Mono', monospace;
+        --sans: 'DM Sans', sans-serif;
+        --bg: #202022;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { color-scheme: dark; }
+
+    body {
+        background-color: var(--bg);
+        color: var(--text);
+        font-family: var(--mono);
+        -webkit-font-smoothing: antialiased;
+        background-image: linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+    }
+
+    .page {
+        width: 1470px;
+        min-height: 2171px;
+        background-color: var(--bg);
+        background-image: linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+        background-size: 40px 40px;
+        margin: 0 auto;
+    }
+
+    .wrap {
+        position: relative;
+        width: 852.5px;
+        margin: -36px auto 0;
+    }
+
+    /* ---------------- HEADER ---------------- */
+    .head {
+        position: relative;
+        height: 296px;
+    }
+
+    .badge {
+        position: absolute;
+        top: 61px;
+        left: 0.5px;
+        display: inline-flex;
+        align-items: center;
+        gap: 7.5px;
+        height: 28px;
+        padding: 0 12.5px 0 13px;
+        border-radius: 14px;
+        background: rgba(15, 185, 129, .1);
+        color: var(--green);
+        font-size: 11px;
+        line-height: 1;
+        white-space: nowrap;
+    }
+
+    .badge .bdot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(4, 149, 105, .56);
+    }
+
+    .name {
+        position: absolute;
+        top: 48px;
+        left: 0;
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 1.48;
+        color: var(--text);
+    }
+
+    .name span { color: var(--accent); }
+
+    .contact {
+        position: absolute;
+        left: 0;
+        font-size: 15px;
+        line-height: 1.48;
+        color: var(--muted);
+        white-space: nowrap;
+    }
+
+    .contact .ci {
+        display: inline-block;
+        color: var(--accent);
+    }
+
+    .contact .mail {
+        color: var(--accent);
+        text-decoration: underline;
+    }
+
+    .glow {
+        position: absolute;
+        left: 625.5px;
+        top: 6px;
+        width: 224px;
+        height: 224px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(0, 228, 255, .055) 0%, rgba(0, 228, 255, 0) 70%);
+    }
+
+    .ring {
+        position: absolute;
+        left: 668.5px;
+        top: 48px;
+        width: 138px;
+        height: 138px;
+        border-radius: 50%;
+        border: 2px solid var(--ring);
+        overflow: hidden;
+    }
+
+    .ring img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .school {
+        position: absolute;
+        left: 622.5px;
+        top: 194px;
+        width: 229px;
+        height: 84px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 9px;
+    }
+
+    .school .sttl {
+        text-align: center;
+        padding-top: 16.6px;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 1.48;
+        color: var(--text);
+    }
+
+    .school .srow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 6.4px;
+    }
+
+    .school .ghicon { display: block; }
+
+    .school .srow a {
+        margin-left: 5.5px;
+        font-size: 14px;
+        line-height: 1.48;
+        color: var(--link);
+        text-decoration: none;
+    }
+
+    /* ---------------- SECTION ---------------- */
+    .sec { margin-top: 4.3px; }
+
+    #tech { margin-top: 0; }
+
+    #projects { margin-top: 24px; }
+
+    .sechead {
+        display: flex;
+        align-items: center;
+        gap: 11.5px;
+    }
+
+    .slabel {
+        font-size: 14px;
+        line-height: 1.48;
+        letter-spacing: 3.2px;
+        color: var(--accent);
+        white-space: nowrap;
+    }
+
+    .sline {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+    }
+
+    #work, #certs { margin-top: 34px; }
+    #hobbies, #langs { margin-top: 36px; }
+
+    /* ---------------- TECH STACK ---------------- */
+    .techstack {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 16.5px;
+        row-gap: 18px;
+        margin-top: 23px;
+        padding-left: 1.5px;
+    }
+
+    .tcard {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .tname {
+        font-weight: 700;
+        font-size: 12.5px;
+        line-height: 1.48;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        color: var(--accent);
+    }
+
+    .tpills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 10px;
+    }
+
+    .pill {
+        display: inline-flex;
+        align-items: center;
+        height: 26px;
+        padding: 0 9px;
+        border-radius: 6px;
+        background: rgba(124, 58, 237, 0.2);
+        color: #a78bfa;
+        font-size: 11.5px;
+        line-height: 1;
+        white-space: nowrap;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* ---------------- PROJECTS ---------------- */
+    .projects {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 16.5px;
+        margin-top: 23px;
+        padding-left: 1.5px;
+    }
+
+    .proj {
+        overflow-wrap: anywhere;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 13px 14px;
+    }
+
+    .pname {
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 1.48;
+        color: var(--text);
+    }
+
+    .pdesc {
+        font-family: var(--sans);
+        font-size: 14px;
+        line-height: 21px;
+        color: var(--muted);
+        margin-top: 7.55px;
+    }
+
+    .ptags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 15.5px;
+    }
+
+    /* subtle source/level tag */
+    .prow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+    }
+
+    .src, .ptags .src {
+        background: transparent;
+        border: 1px dashed #00e5ff;
+        border-radius: 0;
+        color: #00e5ff;
+        font-size: 9px;
+        height: 18px;
+        padding: 0 5px;
+        letter-spacing: .3px;
+    }
+
+    .ptags span {
+        display: inline-flex;
+        align-items: center;
+        height: 24px;
+        padding: 0 8px;
+        border-radius: 6px;
+        background: rgba(124, 58, 237, 0.2);
+        color: #a78bfa;
+        font-size: 11px;
+        line-height: 1;
+        white-space: nowrap;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* ---------------- TWO COLUMNS ---------------- */
+    .cols {
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 34px;
+        align-items: start;
+        margin-top: 26px;
+    }
+
+    .col { min-width: 0; }
+
+    .cols #edu, .cols #work { margin-top: 0; }
+
+    .cols .entry { padding-left: 156px; margin-bottom: 20px; }
+    .cols .date { left: 0; width: 130px; font-size: 12px; color: #9ca3af; }
+    .cols .dot { left: 138px; }
+    .cols .tline { left: 142px; }
+
+    .cols .entry.bare .ebullets { margin-top: 0; }
+
+    .cols #langs .langs {
+        display: flex;
+        flex-direction: column;
+        margin-top: 24px;
+        padding-left: 1.5px;
+    }
+
+    .cols #langs .lrow {
+        display: flex;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .cols #langs .lrow:last-child { border-bottom: none; }
+
+    .cols #langs .ldot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--ring);
+        margin-right: 10px;
+        flex-shrink: 0;
+    }
+
+    .cols #langs .lname {
+        font-family: var(--sans);
+        font-weight: 700;
+        font-size: 16.5px;
+        color: var(--text);
+    }
+
+    .cols #langs .lsub {
+        margin-left: auto;
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--accent);
+    }
+
+    /* ---------------- TIMELINE ENTRIES ---------------- */
+    .entries { margin-top: 38px; }
+
+    .entry {
+        position: relative;
+        padding-left: 169px;
+        margin-bottom: 24.8px;
+    }
+
+    .entry:last-child { margin-bottom: 0; }
+
+    .date {
+        position: absolute;
+        left: 5.5px;
+        top: 0;
+        width: 116px;
+        text-align: right;
+        font-size: 11px;
+        line-height: 1.48;
+        color: var(--muted);
+    }
+
+    .dot {
+        position: absolute;
+        left: 140.5px;
+        top: 4.3px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--ring);
+    }
+
+    .tline {
+        position: absolute;
+        left: 144.5px;
+        top: 12.3px;
+        width: 1px;
+        background: var(--border);
+        bottom: -23.1px;
+    }
+
+    .entry:last-child .tline { display: none; }
+    .entry.nline .tline { display: none; }
+
+    .etitle {
+        font-family: var(--sans);
+        font-weight: 700;
+        font-size: 16.5px;
+        line-height: 1.35;
+        color: var(--text);
+    }
+
+    #certs .etitle {
+        font-weight: 400;
+        font-size: 16.5px;
+        color: var(--muted);
+    }
+
+    .eorg {
+        font-size: 15.5px;
+        line-height: 1.48;
+        color: var(--accent);
+        margin-top: 7px;
+    }
+
+    .ebullets {
+        list-style: none;
+        margin-top: 13px;
+    }
+
+    .entry.noorg .ebullets { margin-top: 6.5px; }
+    .entry.bare .ebullets { margin-top: 25.08px; }
+
+    .ebullets li {
+        position: relative;
+        padding-left: 12px;
+        margin-bottom: 15px;
+        font-family: var(--sans);
+        font-size: 16.5px;
+        line-height: 1.5;
+        color: var(--muted);
+    }
+
+    .ebullets li:last-child { margin-bottom: 0; }
+
+    .ebullets li::before {
+        content: '\203A';
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+    }
+
+    /* ---------------- LANGUAGES ---------------- */
+    .langs {
+        display: grid;
+        grid-template-columns: repeat(3, 219px);
+        column-gap: 68.5px;
+        margin-top: 23px;
+        padding-left: 1.5px;
+    }
+
+    .lcard {
+        height: 77px;
+        padding-top: 19.1px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .lname {
+        font-family: var(--sans);
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 1.3;
+        color: var(--text);
+    }
+
+    .lsub {
+        margin-top: 5.4px;
+        font-size: 13px;
+        line-height: 1.48;
+        color: var(--accent);
+    }
+
+    /* ---------------- FOOTER ---------------- */
+    .foot {
+        margin-top: 4px;
+        border-top: 1px solid var(--border);
+        padding-top: 39.7px;
+        padding-bottom: 130px;
+        text-align: right;
+        font-size: 12px;
+        line-height: 1.48;
+        color: var(--muted);
+    }
+
+    /* ---------------- PRINT / A4 ---------------- */
+    @media print {
+        @page { size: A4 portrait; margin: 12mm 14mm; }
+
+        html, body { background: #ffffff; }
+
+        .page {
+            width: 852.5px;
+            min-height: 0;
+            margin: 0;
+            background: #ffffff;
+        }
+
+        .wrap { margin: -36px auto 0; }
+
+        * {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .entry, .proj, .tcard, .lrow { break-inside: avoid; }
+        .foot { break-before: avoid; padding-bottom: 0; margin-top: 24px; }
+
+        /* 2-page A4 layout: tighter vertical rhythm (print only) */
+        #projects { margin-top: 14px; }
+        #work, #certs { margin-top: 16px; }
+        #hobbies, #langs { margin-top: 16px; }
+        .entries { margin-top: 20px; }
+        .entry, .cols .entry { margin-bottom: 12px; }
+        .entry:last-child, .cols .entry:last-child { margin-bottom: 0; }
+        .wrap * { line-height: 1.32 !important; }
+        .projects, .projects article { gap: 6px; }
+
+        a { text-decoration: none; }
+    }
+</style>
+</head>
+<body>
+<div class="page">
+    <div class="wrap">
+        <!-- ============ HEADER ============ -->
+        <header class="head">
+            <h1 class="name">Jiyan <span>Wang</span></h1>
+
+            <div class="contact" style="top: 130px;">
+                <span class="ci" style="width: 19.4px;">&#9993;</span><span class="mail">jiyanw825@gmail.com</span><span class="ci" style="width: 19px; margin-left: 15px;">&#9742;</span><span>+49 172 5161 530</span>
+            </div>
+            <div class="contact" style="top: 174px;">
+                <span class="ci" style="width: 13.2px;">&#8962;</span><span>Feurerstraße 62, 74078 Heilbronn</span>
+            </div>
+            <div class="contact" style="top: 218px;">
+                <span class="ci" style="width: 15.6px; display: inline-flex; align-items: center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></span><a href="https://www.linkedin.com/in/jiyan-wang-7a69b229a/" style="color:#0066cc;text-decoration:none;">linkedin.com/in/jiyan-wang-7a69b229a</a>
+            </div>
+
+            <div class="glow"></div>
+            <div class="ring"><img src="data:image/jpeg;base64,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" alt="Jiyan Wang"></div>
+
+            <div class="school">
+                <div class="sttl">42 Heilbronn</div>
+                <div class="srow"><svg class="ghicon" width="16" height="16" viewBox="0 0 16 16" fill="#0066cc" style="flex-shrink:0;"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg><a href="https://github.com/jiyan-0525">github.com/jiyan-0525</a></div>
+            </div>
+
             </header>
-            <!-- TECH STACK -->
-            <section>
-                <div class="section-header">
-                    <span class="section-label">Tech Stack</span>
-                    <div class="section-line"></div>
+
+        <!-- ============ TECH-STACK ============ -->
+        <section class="sec" id="tech">
+            <div class="sechead"><span class="slabel">TECH-STACK</span><div class="sline"></div></div>
+            <div class="techstack">
+                <div class="tcard">
+                    <div class="tname">Frontend</div>
+                    <div class="tpills"><span class="pill">React</span><span class="pill">TypeScript</span><span class="pill">HTML</span><span class="pill">CSS</span></div>
                 </div>
-                <div class="tech-grid">
-                    <span class="tech-tag highlight">C</span>
-                    <span class="tech-tag highlight">C++</span>
-                    <span class="tech-tag highlight">Linux</span>
-                    <span class="tech-tag highlight">Shell</span>
-                    <span class="tech-tag highlight">Git</span>
-                    <span class="tech-tag highlight">Docker</span>
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">HTML / CSS</span>
-                    <span class="tech-tag">SQL</span>
-                    <span class="tech-tag">SAP S/4HANA</span>
+                <div class="tcard">
+                    <div class="tname">Sprachen</div>
+                    <div class="tpills"><span class="pill">Python</span><span class="pill">C</span><span class="pill">C++</span><span class="pill">SQL</span><span class="pill">Bash</span></div>
                 </div>
-            </section>
-            <!-- PROJECTS -->
-            <section>
-                <div class="section-header">
-                    <span class="section-label">42 Projects</span>
-                    <div class="section-line"></div>
+                <div class="tcard">
+                    <div class="tname">Backend &amp; Datenbanken</div>
+                    <div class="tpills"><span class="pill">FastAPI</span><span class="pill">Uvicorn</span><span class="pill">Pydantic</span><span class="pill">MariaDB</span><span class="pill">SQLite</span></div>
                 </div>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <div class="project-name">Minishell</div>
-                        <div class="project-desc">Built a fully functional Unix shell from scratch in C</div>
-                        <div class="project-tags">
-                            <span class="ptag">Parser</span>
-                            <span class="ptag">Pipes</span>
-                            <span class="ptag">Fork</span>
-                            <span class="ptag">Signals</span>
-                            <span class="ptag">File Descriptors</span>
-                            </div>
-                        </div>
-                    <div class="project-card">
-                        <div class="project-name">Inception</div>
-                        <div class="project-desc">Docker infrastructure: Nginx, WordPress, MariaDB in VM</div>
-                        <div class="project-tags">
-                            <span class="ptag">Docker</span>
-                            <span class="ptag">Docker Compose</span>
-                            <span class="ptag">Networking</span>
-                            <span class="ptag">SSL/TLS</span>
-                        </div>
-                    </div>
-                        <div class="project-card">
-                               <div class="project-name">Webserv</span></div>
-                            <div class="project-desc">Web server in C++</div>
-                            <div class="project-tags">
-                                <span class="ptag">C++</span>
-                                <span class="ptag">HTTP/1.1</span>
-                                <span class="ptag">Sockets</span>
-                                <span class="ptag">I/O Multiplexing</span>
-                            </div>
-                        </div>
+                <div class="tcard">
+                    <div class="tname">DevOps</div>
+                    <div class="tpills"><span class="pill">Linux</span><span class="pill">Docker</span><span class="pill">Git</span><span class="pill">GitHub Actions</span><span class="pill">DigitalOcean</span></div>
                 </div>
-            </section>
-            <!-- EDUCATION -->
-            <section>
-                <div class="section-header">
-                    <span class="section-label">Education</span>
-                    <div class="section-line"></div>
-                </div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">06/2025 – Present</div>
-                        <div class="timeline-line">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-connector"></div>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">42 Heilbronn</div>
-                            <div class="timeline-org">Peer-to-peer programming school</div>
-                            <ul class="timeline-bullets">
-                                <li>Project-based learning: C, C++, Linux, Networking, Algorithms</li>
-                                <li>Daily Git workflow on GitHub</li>
-                                <li>Collaborative, self-directed environment</li>
-                            </ul>
-                        </div>
+            </div>
+        </section>
+
+        <!-- ============ PROJEKTE ============ -->
+        <section class="sec" id="projects">
+            <div class="sechead"><span class="slabel">AUSGEWÄHLTE PROJEKTE</span><div class="sline"></div></div>
+            <div class="projects">
+                <article class="proj">
+                    <div class="pname">AI Language Coach</div>
+                    <div class="ptags" style="margin-top:6px;">
+                        <span class="src">Arkadia</span>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">09/2024 – 02/2025</div>
-                        <div class="timeline-line">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-connector"></div>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">
-                                IT Professional Trainee
-                            </div>
-                            <div class="timeline-org">Education Future, Heilbronn · DEKRA certified</div>
-                            <ul class="timeline-bullets">
-                                <li>Python · HTML/CSS · SQL</li>
-                                <li>Computers & Hardware Components</li>
-                                <li>IT Industry, Agile Methodologies</li>
-                                <li>Internship at Tecsee GmbH (240h)</li>
-                            </ul>
-                        </div>
+                    <div class="pdesc">AI-Agent in Produktion auf DigitalOcean</div>
+                    <div class="ptags">
+                        <span>React</span><span>TypeScript</span><span>FastAPI</span><span>Uvicorn</span><span>Pydantic AI</span><span>SQLite</span>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">09/2023 – 02/2024</div>
-                        <div class="timeline-line">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-connector"></div>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">
-                                SAP S/4HANA – Sales & Distribution
-                            </div>
-                            <div class="timeline-org">alfatraining, Heilbronn · Certified UC_SD_S42022</div>
-                            <ul class="timeline-bullets">
-                                <li>SAP S/4HANA Sales processes, procurement, delivery</li>
-                                <li>Additional qualification: Material Management (MM)</li>
-                            </ul>
-                        </div>
-                    </div>                
-                    <div class="timeline-item">
-                        <div class="timeline-date">09/2015 – 02/2018</div>
-                        <div class="timeline-line">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-connector"></div>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">Bachelor of Management</div>
-                            <div class="timeline-org">Nanjing University · Recognized by KMK</div>
-                            <ul class="timeline-bullets">
-                                <li>Human Resource Management</li>
-                            </ul>
-                        </div>
+                </article>
+                <article class="proj">
+                    <div class="prow"><div class="pname">Webserv</div><span class="src">42 Heilbronn</span></div>
+                    <div class="pdesc">HTTP-Server, von Grund auf in C++ gebaut</div>
+                    <div class="ptags">
+                        <span>HTTP/1.1</span><span>Sockets</span><span>I/O Multiplexing</span>
                     </div>
-                </div>
-            </section>
-            <!-- EXPERIENCE -->
-            <section>
-                <div class="section-header">
-                    <span class="section-label">Work Experience</span>
-                    <div class="section-line"></div>
-                </div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">06/2016 – 12/2020</div>
-                        <div class="timeline-line">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-connector"></div>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">Sales Representative</div>
-                            <div class="timeline-org">Pony Testing International Group, China</div>
-                            <ul class="timeline-bullets">
-                                <li>Customer management for automotive & electronics lab testing services</li>
-                                <li>Order processing, scheduling coordination, field sales</li>
-                            </ul>
-                        </div>
+                </article>
+                <article class="proj">
+                    <div class="prow"><div class="pname">Inception</div><span class="src">42 Heilbronn</span></div>
+                    <div class="pdesc">Dockerisierte Web-Infrastruktur in einer VM</div>
+                    <div class="ptags">
+                        <span>Nginx</span><span>WordPress</span><span>MariaDB</span><span>SSL/TLS</span>
                     </div>
-                     <div class="timeline-item">
-                        <div class="timeline-date">06/2015 – 05/2016</div>
-                        <div class="timeline-line">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-connector"></div>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">Sales Representative</div>
-                            <div class="timeline-org">JYall.com, Shanghai China</div>
-                            <ul class="timeline-bullets">
-                                <li>A startup in the e-commerce sector</li>
-                            </ul>
-                        </div>
+                </article>
+                <article class="proj">
+                    <div class="prow"><div class="pname">Minishell</div><span class="src">42 Heilbronn</span></div>
+                    <div class="pdesc">Unix-Shell, von Grund auf in C gebaut</div>
+                    <div class="ptags">
+                        <span>C</span><span>Linux</span><span>Bash</span>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">09/2008 – 08/2013</div>
-                        <div class="timeline-line">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-connector"></div>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">Sales Assistant</div>
-                            <div class="timeline-org">Jiuhe Automobile Service(Toyota), China</div>
-                            <ul class="timeline-bullets">
-                                <li>Vehicle registrations & contract administration</li>
-                                <li>Inventory management, daily sales KPI reporting</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- CERTIFICATIONS & LICENSES -->
-            <section>
-                <div class="section-header">
-                    <span class="section-label">Certifications & Licenses</span>
-                    <div class="section-line"></div>
-                </div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date"></div>
-                        <div class="timeline-line">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-connector"></div>
-                        </div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">German Driver's License</div>
-                            <ul class="timeline-bullets">
-                                <li>category B</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-             <!-- HOBBYS -->
-                <section>
-                    <div class="section-header">
-                        <span class="section-label">Hobbies</span>
-                        <div class="section-line"></div>
-                    </div>
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-date"></div>
-                            <div class="timeline-line">
-                                <div class="timeline-dot"></div>
-                                <div class="timeline-connector"></div>
-                            </div>
-                            <div class="timeline-content">
-                                <ul class="timeline-bullets">
-                                    <li>Traveling, Cooking, Yoga and Skiing</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            <!-- LANGUAGES -->
-            <section>
-                <div class="section-header">
-                    <span class="section-label">Languages</span>
-                    <div class="section-line"></div>
-                </div>
-                <div class="lang-grid">
-                    <div class="lang-card">
-                        <div class="lang-name">Chinese</div>
-                        <div class="lang-level">Native</div>
-                    </div>
-                    <div class="lang-card">
-                        <div class="lang-name">German</div>
-                        <div class="lang-level">B2/C1</div>
-                    </div>
-                    <div class="lang-card">
-                        <div class="lang-name">English</div>
-                        <div class="lang-level">B2</div>
-                    </div>
-                </div>
-            </section>
-            <footer>
-                <p>Jiyan Wang · Heilbronn, DE · Updated June 2026</p>
-            </footer>
+                </article>
+            </div>
+        </section>
+
+        <!-- ============ AUSBILDUNG & BERUFSERFAHRUNG ============ -->
+        <div class="cols">
+        <div class="col">
+        <section class="sec" id="edu">
+            <div class="sechead"><span class="slabel">AUSBILDUNG</span><div class="sline"></div></div>
+            <div class="entries">
+                <article class="entry">
+                    <span class="date">09/2026 &ndash; 10/2026</span>
+                    <span class="dot"></span><span class="tline"></span>
+                    <h3 class="etitle">AI Engineering</h3>
+                    <div class="eorg">Arkadia Heilbronn gGmbH &middot; Vollzeitkurs</div>
+                    <ul class="ebullets">
+                        <li>Entwicklung von Multi-Agent-Systemen mit Pydantic AI und lokalem LLM-Fallback</li>
+                    </ul>
+                </article>
+
+                <article class="entry">
+                    <span class="date">06/2025 &ndash; heute</span>
+                    <span class="dot"></span><span class="tline"></span>
+                    <h3 class="etitle">42 Heilbronn</h3>
+                    <div class="eorg">Peer-to-Peer-Programmierungsschule &middot; Vollzeit</div>
+                    <ul class="ebullets">
+                        <li>Projektbasiertes Lernen: C, C++, Linux, Netzwerk, Algorithmen</li>
+                        <li>Tägliche Git-Arbeit auf GitHub</li>
+                        <li>Kollaboratives und projektbasiertes Lernen in Selbstorganisation</li>
+                    </ul>
+                </article>
+
+                <article class="entry">
+                    <span class="date">09/2024 &ndash; 02/2025</span>
+                    <span class="dot"></span><span class="tline"></span>
+                    <h3 class="etitle">IT Kenntnisse Trainee</h3>
+                    <div class="eorg">Education Future, Heilbronn &middot; DEKRA-zertifiziert&middot; Vollzeit </div>
+                    <ul class="ebullets">
+                        <li>Python &middot; HTML/CSS &middot; SQL</li>
+                        <li>Computer und Bauteile</li>
+                        <li>IT-Branche, BWL und agiles Arbeiten</li>
+                    </ul>
+                </article>
+
+                <article class="entry">
+                    <span class="date">09/2023 &ndash; 02/2024</span>
+                    <span class="dot"></span><span class="tline"></span>
+                    <h3 class="etitle">Vertrieb Assistant &amp; SAP S/4HANA</h3>
+                    <div class="eorg">alfatraining, Heilbronn &middot; Vollzeit</div>
+                    <ul class="ebullets">
+                        <li>SAP S/4HANA Verkaufsprozesse, Beschaffung, Lieferung</li>
+                        <li>Zusatzqualifizierung: Materialwirtschaft (MM)</li>
+                    </ul>
+                </article>
+
+                <article class="entry nb">
+                    <span class="date">06/2021 &ndash; 09/2023</span>
+                    <span class="dot"></span><span class="tline"></span>
+                    <h3 class="etitle">Deutschkurs . Berufliche C1</h3>
+                </article>
+
+                <article class="entry">
+                    <span class="date">09/2016 &ndash; 12/2018</span>
+                    <span class="dot"></span><span class="tline"></span>
+                    <h3 class="etitle">Bachelor of Management (B.A. Management)</h3>
+                    <div class="eorg">Nanjing-Universität &middot; von der ZAB bewertet</div>
+                </article>
+
+                <article class="entry">
+                    <span class="date">06/2008 &ndash; 06/2012</span>
+                    <span class="dot"></span><span class="tline"></span>
+                    <h3 class="etitle">College &ndash; Personalwirtschaft</h3>
+                    <div class="eorg">Nanjing Normal University</div>
+                </article>
+            </div>
+        </section>
         </div>
-    </body>
+
+        <div class="col">
+        <!-- ============ BERUFSERFAHRUNG ============ -->
+        <section class="sec" id="work">
+            <div class="sechead"><span class="slabel">BERUFSERFAHRUNG</span><div class="sline"></div></div>
+            <div class="entries">
+                <article class="entry">
+                    <span class="date">06/2016 &ndash; 12/2020</span>
+                    <span class="dot"></span><span class="tline"></span>
+                    <h3 class="etitle">Kundenbetreuerin</h3>
+                    <div class="eorg">Pony Testing International Group, Suzhou China &middot; Vollzeit</div>
+                    <ul class="ebullets">
+                        <li>Kundenbetreuung für Automobilprüfungs- und Elektronik-Labordienstleistungen</li>
+                        <li>Auftragsabwicklung, Planungskoordination, Außendienst</li>
+                        <li>Arbeit mit ERP- und Excel-basierten Auftrags- und Kundendaten</li>
+                    </ul>
+                </article>
+
+                <article class="entry">
+                    <span class="date">06/2015 &ndash; 05/2016</span>
+                    <span class="dot"></span><span class="tline"></span>
+                    <h3 class="etitle">Kundenbetreuerin</h3>
+                    <div class="eorg">JYall.com, Shanghai China &middot; Vollzeit</div>
+                    <ul class="ebullets">
+                        <li>Kundenbetreuung im Bereich E-Commerce</li>
+                    </ul>
+                </article>
+
+                <article class="entry">
+                    <span class="date">08/2008 &ndash; 08/2013</span>
+                    <span class="dot"></span><span class="tline"></span>
+                    <h3 class="etitle">Vertriebsassistent</h3>
+                    <div class="eorg">Jiuhe Automobil-Service(Toyota), Suzhou China &middot; Vollzeit</div>
+                    <ul class="ebullets">
+                        <li>Arbeit mit dem Toyota-ERP-System zur Fahrzeugregistrierung sowie Vertrags- und Bestandsverwaltung</li>
+                        <li>Tägliche Verkaufs-KPI-Berichterstattung und Pflege von Kundendaten in Excel</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- ============ ZERTIFIZIERUNGEN ============ -->
+        <section class="sec" id="certs">
+            <div class="sechead"><span class="slabel">ZERTIFIZIERUNGEN &amp; LIZENZ</span><div class="sline"></div></div>
+            <div class="entries">
+                <article class="entry bare nline">
+                    <ul class="ebullets">
+                        <li><strong>SAP S/4HANA &ndash; Vertrieb &amp; Versand</strong> &middot; UC_SD_S42022, MM</li>
+                        <li><strong>Führerschein</strong> &middot; Klasse B</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- ============ HOBBYS ============ -->
+        <section class="sec" id="hobbies">
+            <div class="sechead"><span class="slabel">HOBBYS</span><div class="sline"></div></div>
+            <div class="entries">
+                <article class="entry bare nline">
+                    <ul class="ebullets">
+                        <li>Reisen, Kochen, Joggen und Skifahren</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- ============ SPRACHEN ============ -->
+        <section class="sec" id="langs">
+            <div class="sechead"><span class="slabel">SPRACHEN</span><div class="sline"></div></div>
+            <div class="langs">
+                <div class="lrow"><span class="ldot"></span><span class="lname">Chinesisch</span><span class="lsub">Muttersprache</span></div>
+                <div class="lrow"><span class="ldot"></span><span class="lname">Deutsch</span><span class="lsub">C1 (Teilnahme am C1-Beruf-Kurs)</span></div>
+                <div class="lrow"><span class="ldot"></span><span class="lname">Englisch</span><span class="lsub">B2</span></div>
+            </div>
+        </section>
+        </div>
+        </div>
+
+        <!-- ============ FOOTER ============ -->
+        <footer class="foot">Jiyan Wang &middot; Heilbronn, DE &middot; Aktualisiert Oktober 2026</footer>
+    </div>
+</div>
+</body>
 </html>

@@ -1,6 +1,8 @@
 FROM debian:bullseye
 
-RUN apt-get update && apt-get install -y vsftpd && rm -rf /var/lib/apt/lists/*
+RUN echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until && \
+    sed -i 's|deb.debian.org|archive.debian.org|g; s|security.debian.org|archive.debian.org|g' /etc/apt/sources.list && \
+    apt-get update && apt-get install -y vsftpd && rm -rf /var/lib/apt/lists/*
 
 COPY conf/vsftpd.conf /etc/vsftpd.conf
 COPY tools/ftp-setup.sh /usr/local/bin/

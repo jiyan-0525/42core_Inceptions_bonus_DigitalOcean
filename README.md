@@ -25,7 +25,7 @@ Adminer	(Database management):    https://jiyawang.42.fr/adminer
 
 Portfolio website:    https://jiyawang.42.fr/portfolio
 
-<img width="1720" height="862" alt="cv" src="assets/cv.png" />
+<img width="1720" height="862" alt="Image" src="https://github.com/user-attachments/assets/b5a8b1b3-1cae-4c83-8bbc-2f0115b63d2b" />
 
 Portainer	(Docker container management):    https://jiyawang.42.fr:9443
 <img width="1860" height="847" alt="portainer" src="https://github.com/user-attachments/assets/42e737c6-5b84-472c-8cc9-ad2dbb8442c6" />
